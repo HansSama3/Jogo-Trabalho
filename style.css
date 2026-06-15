@@ -1,50 +1,114 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
+html,
 body {
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: radial-gradient(circle, #1a0033, #000);
-    font-family: 'Orbitron', sans-serif;
-    color: white;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
+    font-family: 'Orbitron', sans-serif;
+    background: #000;
 }
 
-h1 {
-    margin-bottom: 10px;
-    color: #ff4d6d;
-    letter-spacing: 3px;
-    text-shadow: 0 0 10px #ff4d6d;
-    animation: pulse 2s infinite;
+body {
+    position: relative;
 }
 
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
+/* Esconde título e dicas */
+h1,
+.controls-hint {
+    display: none;
 }
 
+/* Container ocupa a tela inteira */
 .game-container {
-    border: 3px solid #ff4d6d;
-    box-shadow: 0 0 25px #ff4d6d;
-    border-radius: 10px;
+    width: 100vw;
+    height: 100vh;
 }
 
+/* Canvas fullscreen */
 canvas {
     display: block;
-    background: linear-gradient(#6ec6ff, #dff6ff);
-    border-radius: 10px;
+    width: 100vw;
+    height: 100vh;
+    cursor: crosshair;
 }
 
-.controls-hint {
-    margin-top: 10px;
-    font-size: 12px;
-    opacity: 0.8;
+/* Opcional: HUD futurista */
+.hud {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+
+    color: white;
+    font-size: 20px;
+
+    text-shadow:
+        0 0 5px #fff,
+        0 0 10px #00ffff,
+        0 0 20px #00ffff;
+
+    z-index: 10;
+}
+
+/* Opcional: botão fullscreen */
+.fullscreen-btn {
+    position: absolute;
+
+    top: 20px;
+    right: 20px;
+
+    padding: 10px 20px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #ff4d6d;
+    color: white;
+
+    font-family: inherit;
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.fullscreen-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #ff4d6d;
+}
+
+/* Tela de Game Over */
+.game-over {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    color: white;
+
+    text-align: center;
+
+    text-shadow:
+        0 0 10px red,
+        0 0 20px red;
+
+    z-index: 100;
+}
+
+.game-over h2 {
+    font-size: 72px;
+    margin-bottom: 15px;
+}
+
+.game-over p {
+    font-size: 24px;
 }
