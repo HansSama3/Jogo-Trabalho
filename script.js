@@ -20,9 +20,21 @@ window.addEventListener(
 const background = new Image();
 background.src = "background.png";
 
-const playerImg = new Image();
-playerImg.src = "archer.png";
+const runFrames = [];
 
+for (let i = 1; i <= 6; i++) {
+
+    const img = new Image();
+
+    img.src =
+        `run/tile00${i}.png`;
+
+    runFrames.push(img);
+
+}
+
+let currentRunFrame = 0;
+let animationCounter = 0;
 // =====================
 // FUNDO
 // =====================
@@ -187,6 +199,25 @@ function update() {
 
 }
 
+animationCounter++;
+
+if (animationCounter >= 5) {
+
+    currentRunFrame++;
+
+    if (
+        currentRunFrame >=
+        runFrames.length
+    ) {
+
+        currentRunFrame = 0;
+
+    }
+
+    animationCounter = 0;
+
+}
+
 // =====================
 // FUNDO LOOP
 // =====================
@@ -243,14 +274,14 @@ function drawPlayer() {
 
     ctx.drawImage(
 
-        playerImg,
+        runFrames[
+            currentRunFrame
+        ],
 
         player.x,
-
         player.y,
 
         player.w,
-
         player.h
 
     );
@@ -544,16 +575,17 @@ Promise.all([
                 resolve
     ),
 
-    new Promise(
-        resolve =>
-            playerImg.onload =
-                resolve
+    ...runFrames.map(
+        frame =>
+            new Promise(
+                resolve =>
+                    frame.onload =
+                        resolve
+            )
     )
 
-]).then(
-    () => {
+]).then(() => {
 
-        loop();
+    loop();
 
-    }
-);
+});
